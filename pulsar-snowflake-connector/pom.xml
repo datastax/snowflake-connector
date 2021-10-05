@@ -38,7 +38,7 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>snowflake-connector-shaded</artifactId>
+      <artifactId>snowflake-kafka-connector-shaded</artifactId>
       <version>${project.version}</version>
       <exclusions>
         <exclusion>
