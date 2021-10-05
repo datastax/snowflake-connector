@@ -35,6 +35,16 @@
       <groupId>org.apache.pulsar</groupId>
       <artifactId>pulsar-io-kafka-connect-adaptor</artifactId>
       <version>${pulsar.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>log4j</artifactId>
+          <groupId>log4j</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
