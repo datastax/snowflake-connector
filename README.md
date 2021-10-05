@@ -60,7 +60,7 @@ configs:
 
 If you want to develop and test this library you need to build it from sources.
 
-Build Apache Pulsar (2.9-SNAPSHOT currently required) by running 
+Build Apache Pulsar Luna (version defined by pulsar.version in pom.xml) by running 
 
 ```shell
 mvn clean install -DskipTests
