@@ -71,3 +71,10 @@ Build this project as:
 ```shell
 mvn clean install
 ```
+
+### Release
+
+```shell
+mvn release:prepare -DautoVersionSubmodules -P release
+```
+and upload the release to GitHub Releases
