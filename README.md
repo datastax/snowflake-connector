@@ -4,6 +4,8 @@ This connector pushes messages from Apache Pulsar topic into Snowflake DB.
 
 This connector is Open Source Software, Apache 2 licensed and built using [Snowflake's Connector for Kafka](https://github.com/snowflakedb/snowflake-kafka-connector) ([documentation](https://docs.snowflake.com/en/user-guide/kafka-connector.html)).
 
+Please refer to this [blog post](https://medium.com/building-the-open-data-stack/datastax-presents-snowflake-sink-connector-for-apache-pulsar-53629b196064) for a quick walk-through.
+
 ## Installation
 
 Please refer to Apache Pulsar IO [documentation](https://pulsar.apache.org/docs/en/io-use/).
