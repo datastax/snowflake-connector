@@ -32,7 +32,7 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.pulsar</groupId>
+      <groupId>${pulsar.distribution-name}</groupId>
       <artifactId>pulsar-io-kafka-connect-adaptor</artifactId>
       <version>${pulsar.version}</version>
       <exclusions>
@@ -58,30 +58,30 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>org.apache.pulsar</groupId>
+      <groupId>${pulsar.distribution-name}</groupId>
       <artifactId>pulsar-io-core</artifactId>
       <version>${pulsar.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.pulsar</groupId>
+      <groupId>${pulsar.distribution-name}</groupId>
       <artifactId>buildtools</artifactId>
       <version>${pulsar.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.pulsar</groupId>
+      <groupId>${pulsar.distribution-name}</groupId>
       <artifactId>pulsar-broker</artifactId>
       <version>${pulsar.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.pulsar</groupId>
+      <groupId>${pulsar.distribution-name}</groupId>
       <artifactId>testmocks</artifactId>
       <version>${pulsar.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.pulsar</groupId>
+      <groupId>${pulsar.distribution-name}</groupId>
       <artifactId>pulsar-broker</artifactId>
       <version>${pulsar.version}</version>
       <scope>test</scope>

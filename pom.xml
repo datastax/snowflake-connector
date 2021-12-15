@@ -35,6 +35,8 @@
     <module>pulsar-snowflake-connector</module>
   </modules>
   <properties>
+    <!-- org.apache.pulsar (and matching pulsar.version) for OSS -->
+    <pulsar.distribution-name>com.datastax.oss</pulsar.distribution-name>
     <!--
     confluent.version matching Snowflake's connector dependencies
     The rest matching pulsar 2.9-snapshot
@@ -46,14 +48,14 @@
     <maven.compiler.source>8</maven.compiler.source>
     <maven.compiler.target>8</maven.compiler.target>
     <redirectTestOutputToFile>true</redirectTestOutputToFile>
-    <test.additional.args />
+    <test.additional.args/>
     <testReuseFork>true</testReuseFork>
     <testForkCount>4</testForkCount>
     <testRetryCount>1</testRetryCount>
     <skipSourceReleaseAssembly>false</skipSourceReleaseAssembly>
     <shadePluginPhase>package</shadePluginPhase>
     <narPluginPhase>package</narPluginPhase>
-    <pulsar.version>2.8.0.1.1.5</pulsar.version>
+    <pulsar.version>2.8.0.1.1.9</pulsar.version>
     <commons-compress.version>1.21</commons-compress.version>
     <bookkeeper.version>4.14.2</bookkeeper.version>
     <zookeeper.version>3.6.3</zookeeper.version>
@@ -73,7 +75,7 @@
     <rocksdb.version>6.10.2</rocksdb.version>
     <slf4j.version>1.7.25</slf4j.version>
     <commons.collections.version>3.2.2</commons.collections.version>
-    <log4j2.version>2.15.0</log4j2.version>
+    <log4j2.version>2.16.0</log4j2.version>
     <bouncycastle.version>1.69</bouncycastle.version>
     <bouncycastlefips.version>1.0.2</bouncycastlefips.version>
     <jackson.version>2.12.3</jackson.version>
@@ -110,7 +112,7 @@
     <scala.binary.version>2.13</scala.binary.version>
     <scala-library.version>2.13.6</scala-library.version>
     <debezium.version>1.5.4.Final</debezium.version>
-    <snowflakeconnector.version>1.6.1</snowflakeconnector.version>
+    <snowflakeconnector.version>1.6.3</snowflakeconnector.version>
     <jsonwebtoken.version>0.11.1</jsonwebtoken.version>
     <opencensus.version>0.18.0</opencensus.version>
     <hbase.version>2.3.0</hbase.version>
@@ -1358,22 +1360,12 @@ limitations under the License.]]></inlineHeader>
     </repository>
     <repository>
       <id>datastax-releases</id>
-      <url>https://repo.sjc.dsinternal.org/artifactory/datastax-releases-local</url>
+      <url>https://repo.datastax.com/artifactory/datastax-public-releases-local</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
       <releases>
         <enabled>true</enabled>
-      </releases>
-    </repository>
-    <repository>
-      <id>datastax-snapshots-local</id>
-      <url>https://repo.sjc.dsinternal.org/artifactory/datastax-snapshots-local</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
       </releases>
     </repository>
   </repositories>
