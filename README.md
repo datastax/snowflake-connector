@@ -62,21 +62,16 @@ configs:
 
 If you want to develop and test this library you need to build it from sources.
 
-Build Apache Pulsar Luna (version defined by pulsar.version in pom.xml) by running 
-
 ```shell
 mvn clean install -DskipTests
 ```
 
-Build this project as:
-
-```shell
-mvn clean install
-```
+The Apache Pulsar distro is regulated by the properties `pulsar.version` and `pulsar.distribution-name`.
 
 ### Release
 
 ```shell
 mvn release:prepare -DautoVersionSubmodules -P release
 ```
-and upload the release to GitHub Releases
+
+The GitHub release is handled by a GitHub action whenever a tag is being pushed
