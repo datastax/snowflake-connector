@@ -48,7 +48,7 @@
     <maven.compiler.source>8</maven.compiler.source>
     <maven.compiler.target>8</maven.compiler.target>
     <redirectTestOutputToFile>true</redirectTestOutputToFile>
-    <test.additional.args />
+    <test.additional.args/>
     <testReuseFork>true</testReuseFork>
     <testForkCount>4</testForkCount>
     <testRetryCount>1</testRetryCount>
@@ -64,8 +64,8 @@
     <dropwizardmetrics.version>3.2.5</dropwizardmetrics.version>
     <!-- ZooKeeper server -->
     <curator.version>5.1.0</curator.version>
-    <netty.version>4.1.67.Final</netty.version>
-    <netty-tc-native.version>2.0.40.Final</netty-tc-native.version>
+    <netty.version>4.1.72.Final</netty.version>
+    <netty-tc-native.version>2.0.46.Final</netty-tc-native.version>
     <jetty.version>9.4.43.v20210629</jetty.version>
     <conscrypt.version>2.5.2</conscrypt.version>
     <jersey.version>2.34</jersey.version>
@@ -78,8 +78,9 @@
     <log4j2.version>2.17.1</log4j2.version>
     <bouncycastle.version>1.69</bouncycastle.version>
     <bouncycastlefips.version>1.0.2</bouncycastlefips.version>
-    <jackson.version>2.12.3</jackson.version>
-    <jackson.databind.version>2.12.3</jackson.databind.version>
+    <jackson.version>2.12.6</jackson.version>
+    <jackson.databind.version>2.12.6</jackson.databind.version>
+    <snakeyaml.version>1.26</snakeyaml.version>
     <reflections.version>0.9.11</reflections.version>
     <swagger.version>1.6.2</swagger.version>
     <puppycrawl.checkstyle.version>8.37</puppycrawl.checkstyle.version>
@@ -90,7 +91,7 @@
     <grpc.version>1.33.0</grpc.version>
     <perfmark.version>0.19.0</perfmark.version>
     <protoc-gen-grpc-java.version>${grpc.version}</protoc-gen-grpc-java.version>
-    <gson.version>2.8.6</gson.version>
+    <gson.version>2.8.9</gson.version>
     <sketches.version>0.8.3</sketches.version>
     <hbc-core.version>2.2.0</hbc-core.version>
     <cassandra-driver-core.version>3.6.0</cassandra-driver-core.version>
@@ -112,7 +113,7 @@
     <scala.binary.version>2.13</scala.binary.version>
     <scala-library.version>2.13.6</scala-library.version>
     <debezium.version>1.5.4.Final</debezium.version>
-    <snowflakeconnector.version>1.6.3</snowflakeconnector.version>
+    <snowflakeconnector.version>1.7.0</snowflakeconnector.version>
     <jsonwebtoken.version>0.11.1</jsonwebtoken.version>
     <opencensus.version>0.18.0</opencensus.version>
     <hbase.version>2.3.0</hbase.version>
@@ -660,6 +661,11 @@
         <version>${jackson.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>${snakeyaml.version}</version>
       </dependency>
       <dependency>
         <groupId>org.hdrhistogram</groupId>
