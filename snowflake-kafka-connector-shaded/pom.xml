@@ -21,7 +21,7 @@
   <parent>
     <groupId>com.datastax.oss</groupId>
     <artifactId>snowflake-connector</artifactId>
-    <version>0.1.6</version>
+    <version>0.1.7-SNAPSHOT</version>
   </parent>
   <artifactId>snowflake-kafka-connector-shaded</artifactId>
   <name>Snowflake Kafka Connector Shaded</name>
@@ -72,8 +72,8 @@
             </relocation>
           </relocations>
           <transformers>
-            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-            <transformer implementation="org.apache.maven.plugins.shade.resource.PluginXmlResourceTransformer"/>
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+            <transformer implementation="org.apache.maven.plugins.shade.resource.PluginXmlResourceTransformer" />
           </transformers>
         </configuration>
       </plugin>
