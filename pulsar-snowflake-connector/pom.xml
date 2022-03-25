@@ -21,7 +21,7 @@
   <parent>
     <groupId>com.datastax.oss</groupId>
     <artifactId>snowflake-connector</artifactId>
-    <version>0.1.7</version>
+    <version>0.1.8-SNAPSHOT</version>
   </parent>
   <artifactId>pulsar-snowflake-connector</artifactId>
   <name>Pulsar Snowflake Connector</name>
