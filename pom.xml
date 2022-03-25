@@ -1217,7 +1217,7 @@ limitations under the License.]]></inlineHeader>
           <artifactId>maven-release-plugin</artifactId>
           <version>2.5.3</version>
           <configuration>
-            <tagNameFormat>snowflake-connector-{project.version}</tagNameFormat>
+            <tagNameFormat>snowflake-connector-@{project.version}</tagNameFormat>
             <autoVersionSubmodules>true</autoVersionSubmodules>
             <useReleaseProfile>false</useReleaseProfile>
             <releaseProfiles>release</releaseProfiles>
