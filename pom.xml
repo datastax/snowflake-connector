@@ -55,7 +55,7 @@
     <skipSourceReleaseAssembly>false</skipSourceReleaseAssembly>
     <shadePluginPhase>package</shadePluginPhase>
     <narPluginPhase>package</narPluginPhase>
-    <pulsar.version>2.8.0.1.1.11</pulsar.version>
+    <pulsar.version>2.8.0.1.1.33</pulsar.version>
     <commons-compress.version>1.21</commons-compress.version>
     <bookkeeper.version>4.14.2</bookkeeper.version>
     <zookeeper.version>3.6.3</zookeeper.version>
@@ -80,7 +80,6 @@
     <bouncycastlefips.version>1.0.2</bouncycastlefips.version>
     <!-- same as 2.13.2 but with jackson-databind 2.13.2.1 (CVE-2020-36518)-->
     <jackson.version>2.13.2.20220324</jackson.version>
-    <jackson.databind.version>2.12.6</jackson.databind.version>
     <snakeyaml.version>1.26</snakeyaml.version>
     <reflections.version>0.9.11</reflections.version>
     <swagger.version>1.6.2</swagger.version>
