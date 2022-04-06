@@ -71,7 +71,7 @@ The Apache Pulsar distro is regulated by the properties `pulsar.version` and `pu
 ### Release
 
 ```shell
-mvn release:prepare -DautoVersionSubmodules -P release
+mvn release:prepare -Prelease -Dresume=false
 ```
 
 The GitHub release is handled by a GitHub action whenever a tag is being pushed
