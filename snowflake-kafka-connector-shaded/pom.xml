@@ -21,7 +21,7 @@
   <parent>
     <groupId>com.datastax.oss</groupId>
     <artifactId>snowflake-connector</artifactId>
-    <version>0.1.11-SNAPSHOT</version>
+    <version>0.1.11</version>
   </parent>
   <artifactId>snowflake-kafka-connector-shaded</artifactId>
   <name>Snowflake Kafka Connector Shaded</name>
