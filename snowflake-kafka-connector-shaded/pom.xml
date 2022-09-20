@@ -72,8 +72,8 @@
             </relocation>
           </relocations>
           <transformers>
-            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-            <transformer implementation="org.apache.maven.plugins.shade.resource.PluginXmlResourceTransformer" />
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+            <transformer implementation="org.apache.maven.plugins.shade.resource.PluginXmlResourceTransformer"/>
           </transformers>
         </configuration>
       </plugin>
