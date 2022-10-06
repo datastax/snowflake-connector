@@ -55,7 +55,7 @@
     <skipSourceReleaseAssembly>false</skipSourceReleaseAssembly>
     <shadePluginPhase>package</shadePluginPhase>
     <narPluginPhase>package</narPluginPhase>
-    <pulsar.version>2.10.1.5</pulsar.version>
+    <pulsar.version>2.10.2.1</pulsar.version>
     <commons-compress.version>1.21</commons-compress.version>
     <bookkeeper.version>4.14.2</bookkeeper.version>
     <zookeeper.version>3.6.3</zookeeper.version>
