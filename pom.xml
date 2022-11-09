@@ -78,8 +78,7 @@
     <log4j2.version>2.17.1</log4j2.version>
     <bouncycastle.version>1.69</bouncycastle.version>
     <bouncycastlefips.version>1.0.2</bouncycastlefips.version>
-    <!-- same as 2.13.2 but with jackson-databind 2.13.2.1 (CVE-2020-36518)-->
-    <jackson.version>2.13.2.20220324</jackson.version>
+    <jackson.version>2.13.4.20221013</jackson.version>
     <snakeyaml.version>1.31</snakeyaml.version>
     <reflections.version>0.9.11</reflections.version>
     <swagger.version>1.6.2</swagger.version>
