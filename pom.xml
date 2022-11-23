@@ -54,7 +54,7 @@
     <skipSourceReleaseAssembly>false</skipSourceReleaseAssembly>
     <shadePluginPhase>package</shadePluginPhase>
     <narPluginPhase>package</narPluginPhase>
-    <pulsar.version>2.10.2.4</pulsar.version>
+    <pulsar.version>2.10.2.5</pulsar.version>
     <snowflakeconnector.version>1.7.2</snowflakeconnector.version>
     <avro.version>1.10.2</avro.version>
     <mockito.version>3.8.0</mockito.version>
