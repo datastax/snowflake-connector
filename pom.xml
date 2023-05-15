@@ -21,7 +21,7 @@
   <groupId>com.datastax.oss</groupId>
   <artifactId>snowflake-connector</artifactId>
   <packaging>pom</packaging>
-  <version>0.1.13-SNAPSHOT</version>
+  <version>0.1.13</version>
   <name>DataStax Snowflake Connector for Apache Pulsar (R)</name>
   <description>DataStax Snowflake Connector for Apache Pulsar</description>
   <url>https://github.com/datastax/snowflake-connector</url>
@@ -336,7 +336,7 @@ limitations under the License.]]></inlineHeader>
     <connection>scm:git:git@github.com:datastax/snowflake-connector.git</connection>
     <developerConnection>scm:git:git@github.com:datastax/snowflake-connector.git</developerConnection>
     <url>https://github.com/datastax/snowflake-connector</url>
-    <tag>HEAD</tag>
+    <tag>snowflake-connector-0.1.13</tag>
   </scm>
   <developers>
     <developer>
