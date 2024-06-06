@@ -17,28 +17,28 @@ package com.snowflake.kafka.connector;
 
 import static org.mockito.Mockito.when;
 
-import com.snowflake.kafka.connector.internal.Logging;
+import com.snowflake.kafka.connector.internal.KCLogger;
 import com.snowflake.kafka.connector.internal.SnowflakeConnectionService;
-import com.snowflake.kafka.connector.internal.SnowflakeTelemetryService;
+import com.snowflake.kafka.connector.internal.telemetry.SnowflakeTelemetryService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.kafka.common.config.ConfigDef;
 import org.apache.kafka.connect.connector.Task;
 import org.mockito.Mockito;
 
-@Slf4j
 public class SnowflakeSinkConnectorMock extends SnowflakeSinkConnector {
 
+  private KCLogger DYNAMIC_LOGGER;
   final SnowflakeSinkConnector wrapped;
   final SnowflakeConnectionService connMock;
   final SnowflakeTelemetryService telemetryMock;
 
   public SnowflakeSinkConnectorMock() {
-    log.info("[sf_mock] Creating SnowflakeSinkConnectorMock");
+    DYNAMIC_LOGGER = new KCLogger(this.getClass().getName());
+    this.DYNAMIC_LOGGER.info("[sf_mock] Creating SnowflakeSinkConnectorMock");
     wrapped = new SnowflakeSinkConnector();
     telemetryMock = Mockito.mock(SnowflakeTelemetryService.class);
     connMock = Mockito.mock(SnowflakeConnectionService.class);
@@ -74,7 +74,7 @@ public class SnowflakeSinkConnectorMock extends SnowflakeSinkConnector {
   @Override
   public void start(Map<String, String> parsedConfig) {
     Utils.checkConnectorVersion();
-    log.info(Logging.logMessage("SnowflakeSinkConnector:start"));
+    this.DYNAMIC_LOGGER.info("SnowflakeSinkConnector:start");
 
     FieldUtils.writeDeclaredField(wrapped, "setupComplete", false, true);
     FieldUtils.writeDeclaredField(wrapped, "connectorStartTime", System.currentTimeMillis(), true);
