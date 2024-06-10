@@ -15,26 +15,26 @@
  */
 package com.snowflake.kafka.connector;
 
+import static com.snowflake.kafka.connector.internal.streaming.IngestionMethodConfig.SNOWPIPE;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.snowflake.kafka.connector.internal.InternalUtilsAccessor;
-import com.snowflake.kafka.connector.internal.Logging;
+import com.snowflake.kafka.connector.internal.KCLogger;
 import com.snowflake.kafka.connector.internal.SnowflakeConnectionService;
 import com.snowflake.kafka.connector.internal.SnowflakeConnectionServiceV1;
 import com.snowflake.kafka.connector.internal.SnowflakeIngestionService;
 import com.snowflake.kafka.connector.internal.SnowflakeIngestionServiceV1;
 import com.snowflake.kafka.connector.internal.SnowflakeSinkService;
 import com.snowflake.kafka.connector.internal.SnowflakeSinkServiceFactory;
-import com.snowflake.kafka.connector.internal.SnowflakeTelemetryService;
-import com.snowflake.kafka.connector.internal.SnowflakeTelemetryServiceV1;
+import com.snowflake.kafka.connector.internal.telemetry.SnowflakeTelemetryService;
+import com.snowflake.kafka.connector.internal.telemetry.SnowflakeTelemetryServiceV1;
 import com.snowflake.kafka.connector.records.SnowflakeMetadataConfig;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.common.TopicPartition;
@@ -42,16 +42,17 @@ import org.apache.kafka.connect.errors.RetriableException;
 import org.apache.kafka.connect.sink.SinkRecord;
 import org.mockito.Mockito;
 
-@Slf4j
 public class SnowflakeSinkTaskMock extends SnowflakeSinkTask {
 
+  private final KCLogger DYNAMIC_LOGGER;
   final SnowflakeSinkTask wrapped;
   final SnowflakeConnectionService connMock;
   final SnowflakeTelemetryService telemetryMock;
   final SnowflakeIngestionService ingestionMock;
 
   public SnowflakeSinkTaskMock() {
-    log.info("[sf_mock] Creating SnowflakeSinkTaskMock");
+    DYNAMIC_LOGGER = new KCLogger(this.getClass().getName());
+    this.DYNAMIC_LOGGER.info("[sf_mock] Creating SnowflakeSinkTaskMock");
     wrapped = new SnowflakeSinkTask();
     telemetryMock = Mockito.mock(SnowflakeTelemetryServiceV1.class);
 
@@ -97,8 +98,8 @@ public class SnowflakeSinkTaskMock extends SnowflakeSinkTask {
     long startTime = System.currentTimeMillis();
 
     String id = parsedConfig.getOrDefault(Utils.TASK_ID, "-1");
-    FieldUtils.writeDeclaredField(wrapped, "id", id, true);
-    log.info(Logging.logMessage("SnowflakeSinkTask[ID:{}]:start", id));
+    FieldUtils.writeDeclaredField(wrapped, "taskConfigId", id, true);
+    this.DYNAMIC_LOGGER.info("SnowflakeSinkTask[TaskConfigID:{}]:start", id);
 
     // generate topic to table map
     Map<String, String> topic2table = new HashMap<>();
@@ -130,6 +131,7 @@ public class SnowflakeSinkTaskMock extends SnowflakeSinkTask {
     }
 
     FieldUtils.writeDeclaredField(wrapped, "conn", connMock, true);
+    FieldUtils.writeDeclaredField(wrapped, "ingestionMethodConfig", SNOWPIPE, true);
 
     SnowflakeMetadataConfig metadataConfig = new SnowflakeMetadataConfig(parsedConfig);
 
@@ -145,16 +147,15 @@ public class SnowflakeSinkTaskMock extends SnowflakeSinkTask {
 
     FieldUtils.writeDeclaredField(wrapped, "sink", sink, true);
 
-    log.info(
-        Logging.logMessage(
-            "SnowflakeSinkTask[ID:{}]:start. Time: {} seconds",
-            id,
-            (System.currentTimeMillis() - startTime) / 1000));
+    this.DYNAMIC_LOGGER.info(
+        "SnowflakeSinkTask[TaskConfigID:{}]:start. Time: {} seconds",
+        id,
+        (System.currentTimeMillis() - startTime) / 1000);
   }
 
   @Override
   public void put(Collection<SinkRecord> collection) {
-    log.info("[sf_mock] put of {} items", collection.size());
+    this.DYNAMIC_LOGGER.info("[sf_mock] put of {} items", collection.size());
     wrapped.put(collection);
   }
 
