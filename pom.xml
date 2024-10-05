@@ -21,7 +21,7 @@
   <groupId>com.datastax.oss</groupId>
   <artifactId>snowflake-connector</artifactId>
   <packaging>pom</packaging>
-  <version>0.1.14</version>
+  <version>0.1.15-SNAPSHOT</version>
   <name>DataStax Snowflake Connector for Apache Pulsar (R)</name>
   <description>DataStax Snowflake Connector for Apache Pulsar</description>
   <url>https://github.com/datastax/snowflake-connector</url>
