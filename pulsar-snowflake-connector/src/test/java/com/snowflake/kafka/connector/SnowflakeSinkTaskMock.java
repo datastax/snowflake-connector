@@ -19,6 +19,7 @@ import static com.snowflake.kafka.connector.internal.streaming.IngestionMethodCo
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import com.snowflake.kafka.connector.dlq.KafkaRecordErrorReporter;
 import com.snowflake.kafka.connector.internal.InternalUtilsAccessor;
 import com.snowflake.kafka.connector.internal.KCLogger;
 import com.snowflake.kafka.connector.internal.SnowflakeConnectionService;
@@ -58,6 +59,7 @@ public class SnowflakeSinkTaskMock extends SnowflakeSinkTask {
 
     ingestionMock = Mockito.mock(SnowflakeIngestionServiceV1.class);
     when(ingestionMock.getStageName()).thenReturn("stage");
+
     when(ingestionMock.readIngestReport(any())).thenReturn(InternalUtilsAccessor.getEmptyIFSMap());
 
     connMock = Mockito.mock(SnowflakeConnectionServiceV1.class);
@@ -94,16 +96,23 @@ public class SnowflakeSinkTaskMock extends SnowflakeSinkTask {
 
   @SneakyThrows
   @Override
-  public void start(Map<String, String> parsedConfig) {
+  public void start(final Map<String, String> parsedConfig) {
+    this.DYNAMIC_LOGGER.info("starting task...");
+
     long startTime = System.currentTimeMillis();
 
     String id = parsedConfig.getOrDefault(Utils.TASK_ID, "-1");
     FieldUtils.writeDeclaredField(wrapped, "taskConfigId", id, true);
     this.DYNAMIC_LOGGER.info("SnowflakeSinkTask[TaskConfigID:{}]:start", id);
 
+    FieldUtils.writeDeclaredField(wrapped, "taskStartTime", System.currentTimeMillis(), true);
+
     // generate topic to table map
     Map<String, String> topic2table = new HashMap<>();
     FieldUtils.writeDeclaredField(wrapped, "topic2table", topic2table, true);
+
+    // generate metadataConfig table
+    SnowflakeMetadataConfig metadataConfig = new SnowflakeMetadataConfig(parsedConfig);
 
     // enable jvm proxy
     Utils.enableJVMProxy(parsedConfig);
@@ -130,25 +139,34 @@ public class SnowflakeSinkTaskMock extends SnowflakeSinkTask {
               parsedConfig.get(SnowflakeSinkConnectorConfig.BEHAVIOR_ON_NULL_VALUES_CONFIG));
     }
 
+    // we would have already validated the config inside SFConnector start()
+    boolean enableCustomJMXMonitoring = SnowflakeSinkConnectorConfig.JMX_OPT_DEFAULT;
+    if (parsedConfig.containsKey(SnowflakeSinkConnectorConfig.JMX_OPT)) {
+      enableCustomJMXMonitoring =
+          Boolean.parseBoolean(parsedConfig.get(SnowflakeSinkConnectorConfig.JMX_OPT));
+    }
+
+    KafkaRecordErrorReporter kafkaRecordErrorReporter = noOpKafkaRecordErrorReporter();
+
     FieldUtils.writeDeclaredField(wrapped, "conn", connMock, true);
     FieldUtils.writeDeclaredField(wrapped, "ingestionMethodConfig", SNOWPIPE, true);
 
-    SnowflakeMetadataConfig metadataConfig = new SnowflakeMetadataConfig(parsedConfig);
-
     SnowflakeSinkService sink =
-        SnowflakeSinkServiceFactory.builder(connMock)
+        SnowflakeSinkServiceFactory.builder(connMock, SNOWPIPE, parsedConfig)
             .setFileSize(bufferSizeBytes)
             .setRecordNumber(bufferCountRecords)
             .setFlushTime(bufferFlushTime)
             .setTopic2TableMap(topic2table)
             .setMetadataConfig(metadataConfig)
             .setBehaviorOnNullValuesConfig(behavior)
+            .setCustomJMXMetrics(enableCustomJMXMonitoring)
+            .setErrorReporter(kafkaRecordErrorReporter)
+            .setSinkTaskContext(this.context)
             .build();
-
     FieldUtils.writeDeclaredField(wrapped, "sink", sink, true);
 
-    this.DYNAMIC_LOGGER.info(
-        "SnowflakeSinkTask[TaskConfigID:{}]:start. Time: {} seconds",
+    DYNAMIC_LOGGER.info(
+        "task started, execution time: {} milliseconds",
         id,
         (System.currentTimeMillis() - startTime) / 1000);
   }

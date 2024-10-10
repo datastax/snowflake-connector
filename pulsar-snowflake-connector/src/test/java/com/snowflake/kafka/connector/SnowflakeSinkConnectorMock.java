@@ -13,22 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.snowflake.kafka.connector;
 
 import static org.mockito.Mockito.when;
 
 import com.snowflake.kafka.connector.internal.KCLogger;
 import com.snowflake.kafka.connector.internal.SnowflakeConnectionService;
+import com.snowflake.kafka.connector.internal.streaming.DefaultStreamingConfigValidator;
 import com.snowflake.kafka.connector.internal.telemetry.SnowflakeTelemetryService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.kafka.common.config.ConfigDef;
 import org.apache.kafka.connect.connector.Task;
 import org.mockito.Mockito;
 
+@Slf4j
 public class SnowflakeSinkConnectorMock extends SnowflakeSinkConnector {
 
   private KCLogger DYNAMIC_LOGGER;
@@ -72,22 +76,35 @@ public class SnowflakeSinkConnectorMock extends SnowflakeSinkConnector {
   */
   @SneakyThrows
   @Override
-  public void start(Map<String, String> parsedConfig) {
+  public void start(final Map<String, String> parsedConfig) {
+    log.info("SnowflakeSinkConnector:starting...");
+
     Utils.checkConnectorVersion();
-    this.DYNAMIC_LOGGER.info("SnowflakeSinkConnector:start");
 
     FieldUtils.writeDeclaredField(wrapped, "setupComplete", false, true);
     FieldUtils.writeDeclaredField(wrapped, "connectorStartTime", System.currentTimeMillis(), true);
-
-    FieldUtils.writeDeclaredField(wrapped, "setupComplete", false, true);
 
     Map<String, String> config = new HashMap<>(parsedConfig);
     SnowflakeSinkConnectorConfig.setDefaultValues(config);
     FieldUtils.writeDeclaredField(wrapped, "config", config, true);
 
-    Utils.validateConfig(config);
+    SnowflakeSinkConnectorConfig.setDefaultValues(config);
+
     // modify invalid connector name
     Utils.convertAppName(config);
+
+    ConnectorConfigValidator connectorConfigValidator =
+        new DefaultConnectorConfigValidator(new DefaultStreamingConfigValidator());
+
+    connectorConfigValidator.validateConfig(config);
+
+    // enable mdc logging if needed
+    KCLogger.toggleGlobalMdcLoggingContext(
+        Boolean.parseBoolean(
+            config.getOrDefault(
+                SnowflakeSinkConnectorConfig.ENABLE_MDC_LOGGING_CONFIG,
+                SnowflakeSinkConnectorConfig.ENABLE_MDC_LOGGING_DEFAULT)));
+
     // enable proxy
     Utils.enableJVMProxy(config);
 
@@ -97,6 +114,8 @@ public class SnowflakeSinkConnectorMock extends SnowflakeSinkConnector {
     FieldUtils.writeDeclaredField(wrapped, "telemetryClient", telemetryMock, true);
 
     FieldUtils.writeDeclaredField(wrapped, "setupComplete", true, true);
+
+    log.info("SnowflakeSinkConnector:started");
   }
 
   @Override
