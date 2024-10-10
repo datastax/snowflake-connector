@@ -67,6 +67,10 @@
               <shadedPattern>com.datastax.oss.shaded.com.fasterxml</shadedPattern>
             </relocation>
             <relocation>
+              <pattern>com.hubspot</pattern>
+              <shadedPattern>com.datastax.oss.shaded.com.hubspot</shadedPattern>
+            </relocation>
+            <relocation>
               <pattern>com.google</pattern>
               <shadedPattern>com.datastax.oss.shaded.com.google</shadedPattern>
             </relocation>
