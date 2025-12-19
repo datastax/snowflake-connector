@@ -94,7 +94,8 @@ public class SnowflakeSinkConnectorMock extends SnowflakeSinkConnector {
     Utils.convertAppName(config);
 
     ConnectorConfigValidator connectorConfigValidator =
-        new DefaultConnectorConfigValidator(new DefaultStreamingConfigValidator());
+        new DefaultConnectorConfigValidator(
+            new DefaultStreamingConfigValidator(), new DefaultStreamingConfigValidator());
 
     connectorConfigValidator.validateConfig(config);
 
