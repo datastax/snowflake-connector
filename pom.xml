@@ -55,7 +55,7 @@
     <shadePluginPhase>package</shadePluginPhase>
     <narPluginPhase>package</narPluginPhase>
     <pulsar.version>2.10.6.1</pulsar.version>
-    <snowflakeconnector.version>2.4.1</snowflakeconnector.version>
+    <snowflakeconnector.version>3.2.3</snowflakeconnector.version>
     <avro.version>1.11.4</avro.version>
     <mockito.version>3.12.4</mockito.version>
     <!-- Plugin dependencies -->
