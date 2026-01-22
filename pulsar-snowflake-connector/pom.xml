@@ -44,17 +44,7 @@
           <artifactId>log4j</artifactId>
           <groupId>log4j</groupId>
         </exclusion>
-        <exclusion>
-          <groupId>org.lz4</groupId>
-          <artifactId>lz4-java</artifactId>
-        </exclusion>
       </exclusions>
-    </dependency>
-    <!-- Override the transitive org.lz4:lz4-java@1.8.0 to resolve vulnerability -->
-    <dependency>
-      <groupId>at.yawk.lz4</groupId>
-      <artifactId>lz4-java</artifactId>
-      <version>${lz4-java.version}</version>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
