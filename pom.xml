@@ -58,6 +58,10 @@
     <snowflakeconnector.version>3.2.3</snowflakeconnector.version>
     <avro.version>1.11.4</avro.version>
     <mockito.version>3.12.4</mockito.version>
+    <jose4j.version>0.9.6</jose4j.version>
+    <jersey-client.version>2.46</jersey-client.version>
+    <netty-handler.version>4.1.118.Final</netty-handler.version>
+    <commons-lang3.version>3.18.0</commons-lang3.version>
     <!-- Plugin dependencies -->
     <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
     <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
@@ -118,8 +122,34 @@
         <version>${asynchttpclient.version}</version>
         <scope>runtime</scope>
       </dependency>
+      <!-- Override transitive dependency version to fix vulnerability -->
+      <dependency>
+        <groupId>org.bitbucket.b_c</groupId>
+        <artifactId>jose4j</artifactId>
+        <version>${jose4j.version}</version>
+      </dependency>
+      <!-- Override transitive dependency version to fix vulnerability -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang3.version}</version>
+      </dependency>
+      <!-- Override transitive dependency version to fix vulnerability -->
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-handler</artifactId>
+        <version>${netty-handler.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
+  <dependencies>
+    <!-- Override transitive dependency version to fix vulnerability -->
+    <dependency>
+      <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-client</artifactId>
+      <version>${jersey-client.version}</version>
+    </dependency>
+  </dependencies>
   <build>
     <pluginManagement>
       <plugins>
