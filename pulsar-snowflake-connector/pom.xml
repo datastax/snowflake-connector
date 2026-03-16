@@ -44,6 +44,10 @@
           <artifactId>log4j</artifactId>
           <groupId>log4j</groupId>
         </exclusion>
+        <exclusion>
+          <groupId>org.lz4</groupId>
+          <artifactId>lz4-java</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -114,6 +118,24 @@
       <artifactId>snowflake-kafka-connector</artifactId>
       <version>${snowflakeconnector.version}</version>
       <scope>test</scope>
+    </dependency>
+    <!-- Override transitive dependency version to fix vulnerability -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson-core.version}</version>
+    </dependency>
+    <!-- Override transitive dependency version to fix vulnerability -->
+    <dependency>
+      <groupId>at.yawk.lz4</groupId>
+      <artifactId>lz4-java</artifactId>
+      <version>${lz4-java.version}</version>
+    </dependency>
+    <!-- Override transitive dependency version to fix vulnerability -->
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-common</artifactId>
+      <version>${netty-common.version}</version>
     </dependency>
   </dependencies>
   <build>
