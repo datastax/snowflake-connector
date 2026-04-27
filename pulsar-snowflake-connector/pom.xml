@@ -121,6 +121,13 @@
     </dependency>
     <!-- Override transitive dependency version to fix vulnerability -->
     <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-clients</artifactId>
+      <version>${kafka-clients.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Override transitive dependency version to fix vulnerability -->
+    <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
       <version>${jackson-core.version}</version>

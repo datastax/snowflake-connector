@@ -31,6 +31,12 @@
       <artifactId>snowflake-kafka-connector</artifactId>
       <version>${snowflakeconnector.version}</version>
     </dependency>
+    <!-- Override transitive dependency version to fix vulnerability -->
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-clients</artifactId>
+      <version>${kafka-clients.version}</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -76,8 +82,8 @@
             </relocation>
           </relocations>
           <transformers>
-            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-            <transformer implementation="org.apache.maven.plugins.shade.resource.PluginXmlResourceTransformer" />
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+            <transformer implementation="org.apache.maven.plugins.shade.resource.PluginXmlResourceTransformer"/>
           </transformers>
         </configuration>
       </plugin>
