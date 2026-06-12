@@ -96,7 +96,7 @@
     <jackson-core.version>2.21.2</jackson-core.version>
     <plexus-utils.version>4.0.3</plexus-utils.version>
     <lz4-java.version>1.10.4</lz4-java.version>
-    <netty.version>4.1.133.Final</netty.version>
+    <netty.version>4.1.135.Final</netty.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -159,7 +159,25 @@
       <!-- Override transitive dependency version to fix vulnerability -->
       <dependency>
         <groupId>io.netty</groupId>
+        <artifactId>netty-codec-haproxy</artifactId>
+        <version>${netty.version}</version>
+      </dependency>
+      <!-- Override transitive dependency version to fix vulnerability -->
+      <dependency>
+        <groupId>io.netty</groupId>
         <artifactId>netty-codec-dns</artifactId>
+        <version>${netty.version}</version>
+      </dependency>
+      <!-- Override transitive dependency version to fix vulnerability -->
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-resolver-dns</artifactId>
+        <version>${netty.version}</version>
+      </dependency>
+      <!-- Override transitive dependency version to fix vulnerability -->
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-transport-native-unix-common</artifactId>
         <version>${netty.version}</version>
       </dependency>
       <!-- Override transitive dependency version to fix vulnerability -->
